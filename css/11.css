@@ -20,11 +20,12 @@ a {
 }
 /*小屏的时候*/
 .container {
-  width: 1000px;
+  width: 100%;
   margin: auto;
 }
 .container > .row {
   width: 100%;
+  position: relative;
 }
 .container > .row:before,
 .container > .row:after {
