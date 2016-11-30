@@ -34,57 +34,31 @@ $(function () {
     })
     $("#full")[0].addEventListener("webkitTransitionEnd",function () {
         falg=true;
-        // $(".aa").each(function(index,obj) {
-        //     if(num==0){
-        //         $(obj).find(".ship").css({
-        //             animiton:"shiping 1s forwards"
-        //         })
-        //         return;
-        //     }
-        //     if(num!==0){
-        //       if(index==num){
-        //           $(".mar").eq(index).css({
-        //               transform:"translate(-100px,0)",
-        //               opacity:"0"
-        //           })
-        //           $(".right-img").eq(index).css({
-        //               transform:"translate(-100px,0)",
-        //               opacity:"0"
-        //           })
-        //       }else{
-        //           $(".mar").eq(index).css({
-        //               transform:"translate(0,0)",
-        //               opacity:"1"
-        //           })
-        //           $(".right-img").eq(index).css({
-        //               transform:"translate(0,0)",
-        //               opacity:"1"
-        //           })
-        //       }
-        //     }
-        //
-        // })
-        $(".mar").each(function(index,obj) {
-            if(index==num){
-                $(".mar").eq(index).css({
-                    transform:"translate(-100px,0)",
-                    opacity:"0"
-                })
-                $(".right-img").eq(index).css({
-                    transform:"translate(100px,0)",
-                    opacity:"0"
-                })
-            }else{
-                $(".mar").eq(index).css({
-                    transform:"translate(0,0)",
-                    opacity:"1"
-                })
-                $(".right-img").eq(index).css({
-                    transform:"translate(0,0)",
-                    opacity:"1"
-                })
+        $("section").each(function(index,obj){
+            nub=$(this).index()
+            if(nub==-1){
+                return;
+            }
+            if(num!==-1){
+                if(nub==num-1){
+                    $(".mar").eq(nub).css({
+                        transform: "translate(0px,0)",opacity: 1
+                    })
+                    $(".right-img").eq(index).css({
+                        transform: "translate(0px,0)",opacity: 1
+                    })
+
+                }else{
+                    $(".mar").eq(index).css({
+                        transform: "translate(-100px,0)",opacity:0
+                    })
+                    $(".right-img").eq(index).css({
+                        transform: "translate(100px,0)",opacity:0
+                    })
+                }
             }
         })
+
     })
 
     // 操作菜单
