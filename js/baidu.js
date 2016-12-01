@@ -8,30 +8,8 @@ $(function () {
     $("#full").mousemove(function (e) {
         e.preventDefault()
     })
-    touch.on("body","swipeup","#full",function () {
-        if(!falg){
-            return;
-        }
-        num++;
-        if(num==$("section").length){
-            num=$("section").length-1;
-            return;
-        }
-        falg=false;
-        $("#full").css({marginTop:-num*clienth})
-    })
-    touch.on("body","swipedown","#full",function () {
-        if(!falg){
-            return;
-        }
-        num--;
-        if(num==-1){
-            num=0;
-            return;
-        }
-        falg=false;
-        $("#full").css({marginTop:-num*clienth})
-    })
+    touch.on("body","swipeup","#full",mouseup)
+    touch.on("body","swipedown","#full",mousedown)
     $("#full")[0].addEventListener("webkitTransitionEnd",function () {
         falg=true;
         $("section").each(function(index,obj){
@@ -60,7 +38,32 @@ $(function () {
         })
 
     })
-
+    function mouseup() {
+        if(!falg){
+            return;
+        }
+        num++;
+        if(num==$("section").length){
+            num=$("section").length-1;
+            return;
+        }
+        falg=false;
+        $(".lunbo div").removeClass("active").eq(num).addClass("active");
+        $("#full").css({marginTop:-num*clienth})
+    }
+    function mousedown() {
+        if(!falg){
+            return;
+        }
+        num--;
+        if(num==-1){
+            num=0;
+            return;
+        }
+        falg=false;
+        $(".lunbo div").removeClass("active").eq(num).addClass("active");
+        $("#full").css({marginTop:-num*clienth})
+    }
     // 操作菜单
     var flag2=true;
     $(".cai").click(function () {
@@ -141,30 +144,6 @@ $(function () {
         $("#full").css({"marginTop":-num*clienth})
     })
     // 滚轮滚动事件
-    $("#full").mousewheel(function () {
-        if(!falg){
-            return;
-        }
-        num++;
-        if(num==$("section").length){
-            num=$("section").length-1;
-            return;
-        }
-        falg=false;
-        $(".lunbo div").removeClass("active").eq(num).addClass("active");
-        $("#full").css({"marginTop":-num*clienth})
-    },function () {
-        if(!falg){
-            return;
-        }
-        num--;
-        if(num==-1){
-            num=0;
-            return;
-        }
-        falg=false;
-        $(".lunbo div").removeClass("active").eq(num).addClass("active");
-        $("#full").css({"marginTop":-num*clienth})
-    })
+    $("#full").mousewheel(mouseup,mousedown)
     
 })
